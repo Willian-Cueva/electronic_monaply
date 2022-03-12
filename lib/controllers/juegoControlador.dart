@@ -1,24 +1,29 @@
 import 'package:electronic_monaply/controllers/helpers.dart';
+import 'package:electronic_monaply/controllers/propiedadesControlador.dart';
 import 'package:electronic_monaply/models/Propiedad.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart' as http;
+import 'package:electronic_monaply/models/Propietario.dart';
+import 'package:electronic_monaply/models/enums/fichas.dart';
 
 class JuegoControlador {
-  List<Propiedad> propiedades = [];
-
-  // Future<ReqResPropiedad> _cargarPropiedades() async {
-  //   var uri = Uri.parse(ASSETJSON + "propiedades.json");
-  //   final respuesta = await http.get(uri);
-  //   return reqResPropiedadesFromJson(respuesta.body);
-  // }
-  Future<void> cargarPropiedades() async {
-    var uri = Uri.parse(ASSETJSON + "propiedades.json");
-    final respuesta = await http.get(uri);
-    print(respuesta.body);
+  JuegoControlador(List<String> nombres) {
+    _inicializarJugadores(nombres);
   }
 
-  // Future<void> presentar() async {
-  //   AsyncSnapshot<ReqResPropiedad> snapshot = _cargarPropiedades();
-  //   var s = snapshot.data!.Propiedades;
-  // }
+  List<Propiedad> propiedades = [];
+  List<Propietario> propietarios = [];
+
+  void cargarPropiedades(Propietario banco) {
+    propiedades = PropiedadesControlador.obtenerPropiedades(banco);
+  }
+
+  void _inicializarJugadores(List<String> nombres) {
+    propietarios = [];
+    Propietario banco = BANCO;
+    propietarios.add(banco);
+    cargarPropiedades(banco);
+    for (var i = 1; i <= nombres.length; i++) {
+      propietarios.add(Propietario(
+          id: i, ficha: Fichas.values[i], monto: 1500, nombre: nombres[i - 1]));
+    }
+  }
 }

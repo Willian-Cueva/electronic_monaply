@@ -1,24 +1,6 @@
-import 'dart:convert';
+import 'package:electronic_monaply/models/Propietario.dart';
 
-ReqResPropiedad reqResPropiedadesFromJson(String str) => ReqResPropiedad.fromJson(json.decode(str));
-
-String reqResPropiedadesToJson(ReqResPropiedad data) => json.encode(data.toJson());
-
-class ReqResPropiedad {
-    ReqResPropiedad({
-        required this.Propiedades,
-    });
-
-    List<Propiedad> Propiedades;
-
-    factory ReqResPropiedad.fromJson(Map<String, dynamic> json) => ReqResPropiedad(
-        Propiedades: List<Propiedad>.from(json["Propiedades"].map((x) => Propiedad.fromJson(x))),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "Propiedades": List<dynamic>.from(Propiedades.map((x) => x.toJson())),
-    };
-}
+import 'enums/colores.dart';
 
 class Propiedad {
     Propiedad({
@@ -35,11 +17,11 @@ class Propiedad {
         required this.valorCasa,
         required this.valorHotel,
         required this.precio,
-        required this.idPropietario,
+        required this.propietario,
     });
 
     int id;
-    String color;
+    Colores color;
     String titulo;
     int alquiler;
     int unaCasa;
@@ -51,40 +33,8 @@ class Propiedad {
     int valorCasa;
     int valorHotel;
     int precio;
-    int idPropietario;
+    Propietario propietario;
 
-    factory Propiedad.fromJson(Map<String, dynamic> json) => Propiedad(
-        id: json["id"],
-        color: json["color"],
-        titulo: json["titulo"],
-        alquiler: json["alquiler"],
-        unaCasa: json["unaCasa"],
-        dosCasa: json["dosCasa"],
-        tresCasa: json["tresCasa"],
-        cuatroCasa: json["cuatroCasa"],
-        hotel: json["hotel"],
-        valorHipotecable: json["valorHipotecable"],
-        valorCasa: json["valorCasa"],
-        valorHotel: json["valorHotel"],
-        precio: json["precio"],
-        idPropietario:json["idPropietario"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "color": color,
-        "titulo": titulo,
-        "alquiler": alquiler,
-        "unaCasa": unaCasa,
-        "dosCasa": dosCasa,
-        "tresCasa": tresCasa,
-        "cuatroCasa": cuatroCasa,
-        "hotel": hotel,
-        "valorHipotecable": valorHipotecable,
-        "valorCasa": valorCasa,
-        "valorHotel": valorHotel,
-        "precio": precio,
-        "propietario": idPropietario,
-    };
+    
 }
 
