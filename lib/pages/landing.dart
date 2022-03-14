@@ -1,3 +1,5 @@
+import 'package:electronic_monaply/controllers/helpers.dart';
+import 'package:electronic_monaply/pages/principal.dart';
 import 'package:flutter/material.dart';
 
 class Landing extends StatefulWidget {
@@ -21,8 +23,6 @@ class MiStep extends Step {
 class LandingState extends State<Landing> {
   int _ActualStep = 0;
 
-  List<String> nombres = [];
-
   int _numeroJugadores = 0;
 
   AlertDialog _mostrarAlerta(String mensaje) {
@@ -37,34 +37,30 @@ class LandingState extends State<Landing> {
     });
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     List<Step> misSteps = [
-    MiStep(
-        "¿Cuántos Jugadores Hay?",
-        TextFormField(
-          keyboardType: TextInputType.number,
-          decoration: const InputDecoration(hintText: "2"),
-          onChanged: (String valor) {
-            enCambio(int.parse(valor));
-          },
-          validator: (String? value) {
-            if (value == null || value.isEmpty) {
-              return 'Por favor ingrese un número';
-            }
-            if (int.parse(value) < 2 || int.parse(value) >= 6) {
-              return 'El numero debe estar entre 2 y 6';
-            }
-            return null;
-          },
-        )),
-    MiStep("Ingrese el nombre de los Jugadores", ListView.builder(itemBuilder: _numeroJugadores)),
-  ];
+      MiStep(
+          "¿Cuántos Jugadores Hay?",
+          TextFormField(
+            keyboardType: TextInputType.number,
+            onChanged: (String valor) {
+              enCambio(int.parse(valor));
+            },
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Por favor ingrese un número';
+              }
+              if (int.parse(value) < 2 || int.parse(value) > 6) {
+                return 'El numero debe estar entre 2 y 6';
+              }
+              return null;
+            },
+          )),
+    ];
     return Scaffold(
-      appBar: AppBar(title: const Text("Banco Electrónico")),
+      appBar: APPBAR,
       body: Center(
         child: Stepper(
           steps: misSteps,
@@ -94,10 +90,24 @@ class LandingState extends State<Landing> {
               if (_ActualStep + 1 < misSteps.length) {
                 ++_ActualStep;
               } else {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) =>
-                        _mostrarAlerta("FIn de los Landing"));
+                if (_numeroJugadores == 0) {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => _mostrarAlerta(
+                          "Debe Ingresar el número de jugadores"));
+                } else if (_numeroJugadores < 2 || _numeroJugadores > 6) {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          _mostrarAlerta("El número debe estar entre 2 y 6"));
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Principal(numeroJugadores: _numeroJugadores)),
+                  );
+                }
               }
             });
           },
@@ -106,4 +116,3 @@ class LandingState extends State<Landing> {
     );
   }
 }
-

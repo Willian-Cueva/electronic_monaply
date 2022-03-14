@@ -5,8 +5,8 @@ import 'package:electronic_monaply/models/Propietario.dart';
 import 'package:electronic_monaply/models/enums/fichas.dart';
 
 class JuegoControlador {
-  JuegoControlador(List<String> nombres) {
-    _inicializarJugadores(nombres);
+  JuegoControlador(int numeroJugadores) {
+    _inicializarJugadores(numeroJugadores);
   }
 
   List<Propiedad> propiedades = [];
@@ -16,14 +16,14 @@ class JuegoControlador {
     propiedades = PropiedadesControlador.obtenerPropiedades(banco);
   }
 
-  void _inicializarJugadores(List<String> nombres) {
+  void _inicializarJugadores(int numeroJugadores) {
     propietarios = [];
     Propietario banco = BANCO;
     propietarios.add(banco);
     cargarPropiedades(banco);
-    for (var i = 1; i <= nombres.length; i++) {
+    for (var i = 1; i <= numeroJugadores; i++) {
       propietarios.add(Propietario(
-          id: i, ficha: Fichas.values[i], monto: 1500, nombre: nombres[i - 1]));
+          id: i, ficha: Fichas.values[i], monto: 1500, nombre: "Jugador $i"));
     }
   }
 }

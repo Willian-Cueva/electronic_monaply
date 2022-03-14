@@ -28,9 +28,10 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.2
-  http: ^0.13.4
   flutter:
     sdk: flutter
+  http: ^0.13.4
+  carousel_slider: ^4.0.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -48,8 +49,13 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - assets/json/propiedades.json
+  assets:
+    - assets/images/jail.png
+    - assets/images/go.png
+    - assets/images/cofre.png
+    - assets/images/subasta.png
+    - assets/images/tarjeta.png
+    - assets/images/ubicacion.png
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
