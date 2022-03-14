@@ -1,8 +1,9 @@
 import 'package:electronic_monaply/controllers/helpers.dart';
-import 'package:electronic_monaply/controllers/propiedadesControlador.dart';
-import 'package:electronic_monaply/models/Propiedad.dart';
-import 'package:electronic_monaply/models/Propietario.dart';
+import 'package:electronic_monaply/controllers/propiedades_controlador.dart';
+import 'package:electronic_monaply/models/propiedad.dart';
+import 'package:electronic_monaply/models/propietario.dart';
 import 'package:electronic_monaply/models/enums/fichas.dart';
+import 'package:flutter/cupertino.dart';
 
 class JuegoControlador {
   JuegoControlador(int numeroJugadores) {
@@ -23,7 +24,7 @@ class JuegoControlador {
       propietario.monto = propietario.monto - propiedad.precio;
     } catch (e) {
       chis = false;
-      print(e);
+      debugPrint(e.toString());
     }
     return chis;
   }

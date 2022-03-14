@@ -1,4 +1,4 @@
-import 'package:electronic_monaply/models/Propietario.dart';
+import 'package:electronic_monaply/models/propietario.dart';
 
 import 'enums/colores.dart';
 

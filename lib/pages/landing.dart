@@ -1,12 +1,13 @@
-import 'package:electronic_monaply/controllers/JuegoControlador.dart';
+import 'package:electronic_monaply/controllers/juego_controlador.dart';
 import 'package:electronic_monaply/controllers/helpers.dart';
 import 'package:electronic_monaply/pages/principal.dart';
 import 'package:flutter/material.dart';
 
 class Landing extends StatefulWidget {
+  const Landing({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return LandingState();
   }
 }
@@ -16,12 +17,13 @@ class MiStep extends Step {
       : super(
             title: Text(
               title,
-              style: TextStyle(color: Colors.orange, fontSize: 20),
+              style: const TextStyle(color: Colors.orange, fontSize: 20),
             ),
             content: contenido);
 }
 
 class LandingState extends State<Landing> {
+  // ignore: non_constant_identifier_names
   int _ActualStep = 0;
 
   int _numeroJugadores = 0;
@@ -40,7 +42,6 @@ class LandingState extends State<Landing> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     List<Step> misSteps = [
       MiStep(
           "¿Cuántos Jugadores Hay?",
@@ -68,7 +69,7 @@ class LandingState extends State<Landing> {
           currentStep: _ActualStep,
           type: StepperType.vertical,
           onStepCancel: () {
-            print("El paso actual es " + (_ActualStep - 1).toString());
+            debugPrint("El paso actual es " + (_ActualStep - 1).toString());
             setState(() {
               if (_ActualStep != 0) {
                 _ActualStep--;

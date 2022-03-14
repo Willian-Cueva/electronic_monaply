@@ -1,7 +1,7 @@
 import 'package:electronic_monaply/controllers/helpers.dart';
-import 'package:electronic_monaply/controllers/JuegoControlador.dart';
+import 'package:electronic_monaply/controllers/juego_controlador.dart';
 import 'package:electronic_monaply/pages/transaccion.dart';
-import 'package:electronic_monaply/widgets/panelButton.dart';
+import 'package:electronic_monaply/widgets/panel_button.dart';
 import 'package:flutter/material.dart';
 
 class Principal extends StatefulWidget {

@@ -1,7 +1,7 @@
-import 'package:electronic_monaply/controllers/JuegoControlador.dart';
+import 'package:electronic_monaply/controllers/juego_controlador.dart';
 import 'package:flutter/material.dart';
 import 'package:electronic_monaply/controllers/helpers.dart';
-import 'package:electronic_monaply/models/Propiedad.dart';
+import 'package:electronic_monaply/models/propiedad.dart';
 
 class PropiedadWidget extends StatelessWidget {
   final Propiedad propiedad;
@@ -22,12 +22,12 @@ class PropiedadWidget extends StatelessWidget {
           onPressed: () async {
             await _asyncSimpleDialog(context, juegoControlador);
           },
-          child: Text("Comprar"));
+          child: const Text("Comprar"));
     } else {
       w = Column(
         children: [
-          ElevatedButton(onPressed: () {}, child: Text("Pagar")),
-          ElevatedButton(onPressed: () {}, child: Text("Vender"))
+          ElevatedButton(onPressed: () {}, child: const Text("Pagar")),
+          ElevatedButton(onPressed: () {}, child: const Text("Vender"))
         ],
       );
     }
@@ -74,23 +74,23 @@ class PropiedadWidget extends StatelessWidget {
             height: 15,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
               propiedad.titulo,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
           Text("Alquiler \$ ${propiedad.alquiler}"),
           Padding(
-            padding: EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: 10),
             child: Text(
               "\$ ${propiedad.precio.toString()}",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
           Text("Propietario: ${propiedad.propietario.nombre}"),
-          Padding(padding: EdgeInsets.only(top: 10), child: _botones()),
+          Padding(padding: const EdgeInsets.only(top: 10), child: _botones()),
         ],
       ),
     );

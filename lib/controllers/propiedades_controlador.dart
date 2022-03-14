@@ -1,6 +1,5 @@
-import 'package:electronic_monaply/controllers/helpers.dart';
-import 'package:electronic_monaply/models/Propiedad.dart';
-import 'package:electronic_monaply/models/Propietario.dart';
+import 'package:electronic_monaply/models/propiedad.dart';
+import 'package:electronic_monaply/models/propietario.dart';
 import 'package:electronic_monaply/models/enums/colores.dart';
 
 class PropiedadesControlador {

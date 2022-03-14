@@ -1,5 +1,5 @@
 // ignore: constant_identifier_names
-import 'package:electronic_monaply/models/Propietario.dart';
+import 'package:electronic_monaply/models/propietario.dart';
 import 'package:electronic_monaply/models/enums/colores.dart';
 import 'package:electronic_monaply/models/enums/fichas.dart';
 import 'package:flutter/material.dart';

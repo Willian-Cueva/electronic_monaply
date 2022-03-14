@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:electronic_monaply/controllers/helpers.dart';
-import 'package:electronic_monaply/controllers/JuegoControlador.dart';
+import 'package:electronic_monaply/controllers/juego_controlador.dart';
 import 'package:electronic_monaply/widgets/PropiedadWidget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
