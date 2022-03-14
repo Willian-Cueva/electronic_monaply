@@ -15,6 +15,37 @@ Propietario BANCO =
 AppBar APPBAR = AppBar(title: const Text("Banco Electrónico"));
 
 Color traductorColor(Colores color) {
-  
-  return Colors.black;
+  Color respuesta;
+
+  switch (color) {
+    case Colores.amarillo:
+      respuesta = Colors.yellowAccent;
+      break;
+    case Colores.azul:
+      respuesta = Colors.blue.shade900;
+      break;
+    case Colores.morado:
+      respuesta = Colors.purple;
+      break;
+    case Colores.naranja:
+      respuesta = Colors.orange;
+      break;
+    case Colores.rojo:
+      respuesta = Colors.red;
+      break;
+    case Colores.marron:
+      respuesta = Colors.brown;
+      break;
+    case Colores.verde:
+      respuesta = Colors.green;
+      break;
+    case Colores.celeste:
+      respuesta = Colors.blue;
+      break;
+    default:
+      respuesta = Colors.pink;
+      break;
+  }
+
+  return respuesta;
 }
