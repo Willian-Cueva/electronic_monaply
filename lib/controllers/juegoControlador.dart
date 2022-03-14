@@ -16,6 +16,18 @@ class JuegoControlador {
     propiedades = PropiedadesControlador.obtenerPropiedades(banco);
   }
 
+  bool comprarPropiedad(Propiedad propiedad, Propietario propietario) {
+    bool chis = true;
+    try {
+      propiedad.propietario = propietario;
+      propietario.monto = propietario.monto - propiedad.precio;
+    } catch (e) {
+      chis = false;
+      print(e);
+    }
+    return chis;
+  }
+
   void _inicializarJugadores(int numeroJugadores) {
     propietarios = [];
     Propietario banco = BANCO;

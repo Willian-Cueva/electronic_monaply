@@ -1,3 +1,4 @@
+import 'package:electronic_monaply/controllers/JuegoControlador.dart';
 import 'package:electronic_monaply/controllers/helpers.dart';
 import 'package:electronic_monaply/pages/principal.dart';
 import 'package:flutter/material.dart';
@@ -104,8 +105,10 @@ class LandingState extends State<Landing> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            Principal(numeroJugadores: _numeroJugadores)),
+                        builder: (context) => Principal(
+                              juegoControlador:
+                                  JuegoControlador(_numeroJugadores),
+                            )),
                   );
                 }
               }

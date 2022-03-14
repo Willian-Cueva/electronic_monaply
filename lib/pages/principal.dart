@@ -5,19 +5,18 @@ import 'package:electronic_monaply/widgets/panelButton.dart';
 import 'package:flutter/material.dart';
 
 class Principal extends StatefulWidget {
-  final int numeroJugadores;
+  final JuegoControlador juegoControlador;
 
-  const Principal({Key? key, required this.numeroJugadores}) : super(key: key);
+  const Principal({Key? key, required this.juegoControlador}) : super(key: key);
   @override
   // ignore: no_logic_in_create_state
-  State<Principal> createState() => _PrincipalState(numeroJugadores);
+  State<Principal> createState() => _PrincipalState(juegoControlador);
 }
 
 class _PrincipalState extends State<Principal> {
-  int numeroJugadores;
+  JuegoControlador juego;
 
-  _PrincipalState(this.numeroJugadores);
-  JuegoControlador juego = JuegoControlador(6);
+  _PrincipalState(this.juego);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

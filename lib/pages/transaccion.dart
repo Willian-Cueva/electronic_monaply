@@ -10,6 +10,9 @@ class Transaccion extends StatelessWidget {
   const Transaccion({Key? key, required this.juegoControlador})
       : super(key: key);
 
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +23,7 @@ class Transaccion extends StatelessWidget {
             options: CarouselOptions(
                 enableInfiniteScroll: false, autoPlay: true, height: 275),
             items: juegoControlador.propiedades
-                .map((e) => PropiedadWidget(propiedad: e))
+                .map((e) => PropiedadWidget(propiedad: e,juegoControlador: juegoControlador,context: context,))
                 .toList()),
       ),
     );
