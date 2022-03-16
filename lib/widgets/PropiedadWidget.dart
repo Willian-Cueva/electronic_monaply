@@ -20,7 +20,7 @@ class PropiedadWidget extends StatelessWidget {
     if (propiedad.propietario.nombre == "Banco") {
       w = ElevatedButton(
           onPressed: () async {
-            await _asyncSimpleDialog(context, juegoControlador);
+            await _asyncComprar(context, juegoControlador);
           },
           child: const Text("Comprar"));
     } else {
@@ -34,7 +34,7 @@ class PropiedadWidget extends StatelessWidget {
     return w;
   }
 
-  Future<void> _asyncSimpleDialog(
+  Future<void> _asyncComprar(
       BuildContext context, JuegoControlador juegoControlador) async {
     return await showDialog(
         context: context,
@@ -43,13 +43,16 @@ class PropiedadWidget extends StatelessWidget {
           return SimpleDialog(
             title: const Text('Selecciona el Jugador'),
             children: juegoControlador.propietarios
-                .map((e) => ElevatedButton(
-                    onPressed: () {
-                      juegoControlador.comprarPropiedad(propiedad, e);
-                      Navigator.pop(context);
-                      Navigator.pop(context);
-                    },
-                    child: Text(e.nombre)))
+                .map((e) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            juegoControlador.comprarPropiedad(propiedad, e);
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                          child: Text(e.nombre)),
+                    ))
                 .toList(),
           );
         });
