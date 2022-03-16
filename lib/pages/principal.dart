@@ -1,5 +1,6 @@
 import 'package:electronic_monaply/controllers/helpers.dart';
 import 'package:electronic_monaply/controllers/juego_controlador.dart';
+import 'package:electronic_monaply/pages/subasta.dart';
 import 'package:electronic_monaply/pages/transaccion.dart';
 import 'package:electronic_monaply/widgets/panel_button.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _PrincipalState extends State<Principal> {
               PanelButton(
                   asset: "subasta.png",
                   text: "Subasta",
-                  ventana: Transaccion(juegoControlador: juego))
+                  ventana: Subasta(juegoControlador: juego))
             ],
           ),
           Row(
@@ -55,7 +56,7 @@ class _PrincipalState extends State<Principal> {
             children: [
               PanelButton(
                   asset: "cofre.png",
-                  text: "Arca Comunal",
+                  text: "Arca",
                   ventana: Transaccion(juegoControlador: juego)),
               PanelButton(
                   asset: "tarjeta.png",
