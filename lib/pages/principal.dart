@@ -56,7 +56,7 @@ class _PrincipalState extends State<Principal> {
             children: [
               PanelButton(
                   asset: "cofre.png",
-                  text: "Arca",
+                  text: "Chance",
                   ventana: Transaccion(juegoControlador: juego)),
               PanelButton(
                   asset: "tarjeta.png",

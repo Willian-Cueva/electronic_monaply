@@ -1,6 +1,7 @@
 import 'package:electronic_monaply/controllers/helpers.dart';
 import 'package:electronic_monaply/controllers/juego_controlador.dart';
 import 'package:electronic_monaply/models/enums/colores.dart';
+import 'package:electronic_monaply/models/propietario.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -52,6 +53,7 @@ class _SubastaState extends State<Subasta> {
   void cancelTimer() {
     _timer?.cancel();
     _start = 10;
+    _monto += 20;
     _timer = Timer.periodic(
       const Duration(seconds: 1),
       (Timer timer) => setState(
@@ -78,7 +80,9 @@ class _SubastaState extends State<Subasta> {
   Widget _termino() {
     Widget res;
     if (_start == 0) {
-      res = boton(() => {}, "Elegir Jugador");
+      res = boton(() async {
+        _elegirJugador(context, juegoControlador);
+      }, "Elegir Jugador");
     } else {
       if (!_inicioConteo) {
         res = boton(() => {startTimer()}, "Iniciar");
@@ -87,6 +91,54 @@ class _SubastaState extends State<Subasta> {
       }
     }
     return res;
+  }
+
+  Future<void> _elegirJugador(
+      BuildContext context, JuegoControlador juegoControlador) async {
+    return await showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: const Text('Selecciona el Jugador'),
+            children: juegoControlador.propietarios
+                .map((e) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: ElevatedButton(
+                          onPressed: () async {
+                            await _asyncComprar(context, e);
+                          },
+                          child: Text(e.nombre)),
+                    ))
+                .toList(),
+          );
+        });
+  }
+
+  Future<void> _asyncComprar(
+      BuildContext context, Propietario propietario) async {
+    return await showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: const Text('Selecciona el Jugador'),
+            children: juegoControlador
+                .propiedadesSinComprar()
+                .map((e) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            juegoControlador.comprarPropiedad(e, propietario);
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                          child: Text(e.titulo)),
+                    ))
+                .toList(),
+          );
+        });
   }
 
   @override

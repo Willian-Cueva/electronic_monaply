@@ -6,13 +6,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class Transaccion extends StatelessWidget {
   final JuegoControlador juegoControlador;
-
   const Transaccion({Key? key, required this.juegoControlador})
       : super(key: key);
-
-
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
