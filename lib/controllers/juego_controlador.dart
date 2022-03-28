@@ -10,8 +10,18 @@ class JuegoControlador {
     _inicializarJugadores(numeroJugadores);
   }
 
+  List<Propietario> getParticipantes() {
+    return propietarios.where((element) => element.nombre != "Banco").toList();
+  }
+
   List<Propiedad> propiedades = [];
   List<Propietario> propietarios = [];
+
+  List<Propiedad> getPropiedadesDeUnPropietario(Propietario propietario) {
+    return propiedades
+        .where((element) => element.propietario.nombre == propietario.nombre)
+        .toList();
+  }
 
   bool _monopolio(Propiedad propiedad) {
     bool n = true;
@@ -28,17 +38,56 @@ class JuegoControlador {
     return n;
   }
 
-  void pagar(int valor, Propietario propietario) {
-    if (propietario.monto < valor) {
-      List<Propiedad> uPropiedades =
-          propiedades.where((element) => element.propietario.nombre==propietario.nombre&& !element.hipotecada).toList();
-      int numeroPropiedades = uPropiedades.length;
-      for (var i = 0; i < uPropiedades.length; i++) {
-        
-      }
-    } else {
+  bool compraPropiedadSubasta(
+      int valor, Propietario propietario, Propiedad propiedad) {
+    bool chis = false;
+    if (propietario.monto >= valor) {
+      propiedad.propietario = propietario;
       propietario.monto -= valor;
+      chis = true;
     }
+    return chis;
+  }
+
+  bool pagar(int valor, Propietario propietario,
+      {bool pasandoPorPropiedad = false}) {
+    bool chis = true;
+    if (valor > 0) {
+      propietario.monto += valor;
+    } else {
+      if (propietario.monto < valor) {
+        List<Propiedad> uPropiedades = propiedades
+            .where((element) =>
+                element.propietario.nombre == propietario.nombre &&
+                !element.hipotecada)
+            .toList();
+        int newMonto = propietario.monto;
+        for (var i = 0; i < uPropiedades.length; i++) {
+          if (!uPropiedades[i].hipotecada) {
+            switch (uPropiedades[i].numeroCasas) {
+              case 5:
+                newMonto += uPropiedades[i].valorHotel;
+                break;
+              default:
+                newMonto +=
+                    uPropiedades[i].valorCasa * uPropiedades[i].numeroCasas;
+                break;
+            }
+            uPropiedades[i].numeroCasas = 0;
+            if (!(newMonto >= valor)) {
+              newMonto += uPropiedades[i].valorHipotecable;
+              uPropiedades[i].hipotecada = true;
+            }
+          }
+          if (newMonto >= valor) {
+            propietario.monto += valor;
+          }
+        }
+      } else {
+        propietario.monto += valor;
+      }
+    }
+    return chis;
   }
 
   void pasarPorPropiedadConPropietario(
@@ -68,6 +117,7 @@ class JuegoControlador {
           break;
       }
     }
+    pagar(-valor, propietario);
   }
 
   List<Propiedad> propiedadesSinComprar() {
@@ -81,13 +131,11 @@ class JuegoControlador {
   }
 
   bool comprarPropiedad(Propiedad propiedad, Propietario propietario) {
-    bool chis = true;
-    try {
+    bool chis = false;
+    if (propietario.monto >= propiedad.precio) {
       propiedad.propietario = propietario;
       propietario.monto = propietario.monto - propiedad.precio;
-    } catch (e) {
-      chis = false;
-      debugPrint(e.toString());
+      chis = true;
     }
     return chis;
   }
@@ -99,7 +147,10 @@ class JuegoControlador {
     cargarPropiedades(banco);
     for (var i = 1; i <= numeroJugadores; i++) {
       propietarios.add(Propietario(
-          id: i, ficha: Fichas.values[i], monto: 1500, nombre: "Jugador $i"));
+          id: i,
+          ficha: Fichas.values[i],
+          monto: DINEROINICIO,
+          nombre: "Jugador $i"));
     }
   }
 }

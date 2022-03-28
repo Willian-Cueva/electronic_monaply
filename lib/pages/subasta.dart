@@ -5,8 +5,6 @@ import 'package:electronic_monaply/models/propietario.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter/scheduler.dart';
-
 class Subasta extends StatefulWidget {
   final JuegoControlador juegoControlador;
 
@@ -21,11 +19,10 @@ class _SubastaState extends State<Subasta> {
   final JuegoControlador juegoControlador;
 
   Timer? _timer;
-  int _start = 10;
-  int _monto = 20;
+  int _start = TIEMPO_REGRESIVO;
+  int _monto = MONTO_INICIAL;
 
   bool _inicioConteo = false;
-  bool _terminoConteo = false;
 
   _SubastaState(this.juegoControlador);
 
@@ -52,7 +49,7 @@ class _SubastaState extends State<Subasta> {
 
   void cancelTimer() {
     _timer?.cancel();
-    _start = 10;
+    _start = TIEMPO_REGRESIVO;
     _monto += 20;
     _timer = Timer.periodic(
       const Duration(seconds: 1),
@@ -129,10 +126,17 @@ class _SubastaState extends State<Subasta> {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: ElevatedButton(
                           onPressed: () {
-                            juegoControlador.comprarPropiedad(e, propietario);
-                            Navigator.pop(context);
-                            Navigator.pop(context);
-                            Navigator.pop(context);
+                            if (!juegoControlador.compraPropiedadSubasta(
+                                _monto, propietario, e)) {
+                              showAlerta(
+                                  "Dinero Insuficiente :'v, jajajaj", context);
+                            } else {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              showAlerta(
+                                  "Casa Comprada Satisfactoriamente", context);
+                            }
                           },
                           child: Text(e.titulo)),
                     ))

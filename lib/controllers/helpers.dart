@@ -11,8 +11,35 @@ const ASSETJSON = "assets/json/";
 Propietario BANCO =
     Propietario(id: 0, ficha: Fichas.zapato, monto: 100000, nombre: "Banco");
 
+void showAlerta(String msg, BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (BuildContext context) => mostrarAlerta(msg));
+}
+
+AlertDialog mostrarAlerta(String mensaje) {
+  return AlertDialog(
+    content: Text(mensaje),
+  );
+}
+
 // ignore: non_constant_identifier_names
 AppBar APPBAR = AppBar(title: const Text("Banco Electrónico"));
+
+// ignore: non_constant_identifier_names
+int DINEROINICIO = 70;
+// ignore: non_constant_identifier_names
+int PASARGO = 200;
+// ignore: non_constant_identifier_names
+int CARCEL = -50;
+// ignore: non_constant_identifier_names
+int UBICION = -50;
+
+// ignore: non_constant_identifier_names
+int TIEMPO_REGRESIVO = 3;
+
+// ignore: non_constant_identifier_names
+int MONTO_INICIAL = 20;
 
 Color traductorColor(Colores color) {
   Color respuesta;

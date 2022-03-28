@@ -1,5 +1,7 @@
 import 'package:electronic_monaply/controllers/helpers.dart';
 import 'package:electronic_monaply/controllers/juego_controlador.dart';
+import 'package:electronic_monaply/pages/accion.dart';
+import 'package:electronic_monaply/pages/detalles.dart';
 import 'package:electronic_monaply/pages/subasta.dart';
 import 'package:electronic_monaply/pages/transaccion.dart';
 import 'package:electronic_monaply/widgets/panel_button.dart';
@@ -21,7 +23,21 @@ class _PrincipalState extends State<Principal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: APPBAR,
+      appBar: AppBar(
+        title: const Text("Banco Electrónico"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Detalles(juegoControlador: juego, context: context)),
+                );
+              },
+              icon: const Icon(Icons.info))
+        ],
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -31,7 +47,11 @@ class _PrincipalState extends State<Principal> {
               PanelButton(
                   asset: "jail.png",
                   text: "Cárcel",
-                  ventana: Transaccion(juegoControlador: juego)),
+                  ventana: Accion(
+                      valor: CARCEL,
+                      context: context,
+                      title: "Salir de la Cárcel",
+                      juegoControlador: juego)),
               PanelButton(
                   asset: "subasta.png",
                   text: "Subasta",
@@ -44,11 +64,19 @@ class _PrincipalState extends State<Principal> {
               PanelButton(
                   asset: "go.png",
                   text: "GO",
-                  ventana: Transaccion(juegoControlador: juego)),
+                  ventana: Accion(
+                      valor: PASARGO,
+                      context: context,
+                      title: "Pasó por GO",
+                      juegoControlador: juego)),
               PanelButton(
                   asset: "ubicacion.png",
                   text: "Ubicación",
-                  ventana: Transaccion(juegoControlador: juego))
+                  ventana: Accion(
+                      valor: UBICION,
+                      context: context,
+                      title: "Ubicación",
+                      juegoControlador: juego))
             ],
           ),
           Row(

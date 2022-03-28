@@ -47,9 +47,16 @@ class PropiedadWidget extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: ElevatedButton(
                           onPressed: () {
-                            juegoControlador.comprarPropiedad(propiedad, e);
-                            Navigator.pop(context);
-                            Navigator.pop(context);
+                            if (juegoControlador.comprarPropiedad(
+                                propiedad, e)) {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              showAlerta(
+                                  "Casa comprada exitosamente :D", context);
+                            } else {
+                              showAlerta(
+                                  "Dinero Insuficiente :( jajajaj", context);
+                            }
                           },
                           child: Text(e.nombre)),
                     ))
