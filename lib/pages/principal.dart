@@ -4,6 +4,7 @@ import 'package:electronic_monaply/pages/accion.dart';
 import 'package:electronic_monaply/pages/detalles.dart';
 import 'package:electronic_monaply/pages/subasta.dart';
 import 'package:electronic_monaply/pages/transaccion.dart';
+import 'package:electronic_monaply/pages/pagar.dart';
 import 'package:electronic_monaply/widgets/panel_button.dart';
 import 'package:flutter/material.dart';
 
@@ -82,10 +83,10 @@ class _PrincipalState extends State<Principal> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              PanelButton(
-                  asset: "cofre.png",
-                  text: "Chance",
-                  ventana: Transaccion(juegoControlador: juego)),
+              // PanelButton(
+              //     asset: "cofre.png",
+              //     text: "Chance",
+              //     ventana: Pagar(juegoControlador: juego,propiedad: juego.propiedades[0],propietario: juego.propietarios[0],)),
               PanelButton(
                   asset: "tarjeta.png",
                   text: "Propiedad",

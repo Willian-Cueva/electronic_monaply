@@ -1,4 +1,5 @@
 import 'package:electronic_monaply/controllers/juego_controlador.dart';
+import 'package:electronic_monaply/pages/pagar.dart';
 import 'package:flutter/material.dart';
 import 'package:electronic_monaply/controllers/helpers.dart';
 import 'package:electronic_monaply/models/propiedad.dart';
@@ -79,6 +80,12 @@ class PropiedadWidget extends StatelessWidget {
                               showAlerta(
                                   "Casa comprada exitosamente :D", context);
                             } else {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Pagar(
+                                        juegoControlador: juegoControlador, propietario: e,),
+                              );
                               showAlerta(
                                   "Dinero Insuficiente :( jajajaj o ha ocurrido un error :[",
                                   context);
