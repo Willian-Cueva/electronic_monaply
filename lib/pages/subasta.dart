@@ -98,7 +98,7 @@ class _SubastaState extends State<Subasta> {
         builder: (BuildContext context) {
           return SimpleDialog(
             title: const Text('Selecciona el Jugador'),
-            children: juegoControlador.propietarios
+            children: juegoControlador.getParticipantes()
                 .map((e) => Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: ElevatedButton(
@@ -119,7 +119,7 @@ class _SubastaState extends State<Subasta> {
         barrierDismissible: true,
         builder: (BuildContext context) {
           return SimpleDialog(
-            title: const Text('Selecciona el Jugador'),
+            title: const Text('Selecciona una Propiedad'),
             children: juegoControlador
                 .propiedadesSinComprar()
                 .map((e) => Padding(

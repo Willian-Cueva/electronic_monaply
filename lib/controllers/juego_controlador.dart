@@ -49,8 +49,36 @@ class JuegoControlador {
     return chis;
   }
 
-  bool pagar(int valor, Propietario propietario,
-      {bool pasandoPorPropiedad = false}) {
+  int valorDELaSiguienteCasa(Propiedad propiedad) {
+    int valor = 0;
+    if (propiedad.numeroCasas < 5) {
+      switch (propiedad.numeroCasas) {
+        case 4:
+          valor = propiedad.valorHotel;
+          break;
+        default:
+          valor = propiedad.valorCasa;
+          break;
+      }
+    }
+    return valor;
+  }
+
+  bool comprarCasa(Propiedad propiedad, Propietario propietario) {
+    bool chis = false;
+
+    if (valorDELaSiguienteCasa(propiedad) != 0) {
+      if (propietario.monto >= valorDELaSiguienteCasa(propiedad)) {
+        propietario.monto -= valorDELaSiguienteCasa(propiedad);
+        propiedad.numeroCasas++;
+        chis = true;
+      }
+    }
+
+    return chis;
+  }
+
+  bool pagar(int valor, Propietario propietario) {
     bool chis = true;
     if (valor > 0) {
       propietario.monto += valor;
@@ -63,6 +91,7 @@ class JuegoControlador {
             .toList();
         int newMonto = propietario.monto;
         for (var i = 0; i < uPropiedades.length; i++) {
+          debugPrint("si entra");
           if (!uPropiedades[i].hipotecada) {
             switch (uPropiedades[i].numeroCasas) {
               case 5:
@@ -90,7 +119,7 @@ class JuegoControlador {
     return chis;
   }
 
-  void pasarPorPropiedadConPropietario(
+  bool pasarPorPropiedadConPropietario(
       Propietario propietario, Propiedad propiedad) {
     int valor = propiedad.alquiler;
     if (_monopolio(propiedad) && propiedad.numeroCasas == 0) {
@@ -117,7 +146,7 @@ class JuegoControlador {
           break;
       }
     }
-    pagar(-valor, propietario);
+    return pagar(-valor, propietario);
   }
 
   List<Propiedad> propiedadesSinComprar() {

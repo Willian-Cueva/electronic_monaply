@@ -1,3 +1,4 @@
+import 'package:electronic_monaply/controllers/helpers.dart';
 import 'package:electronic_monaply/controllers/juego_controlador.dart';
 import 'package:flutter/material.dart';
 
@@ -29,9 +30,13 @@ class Accion extends StatelessWidget {
               itemBuilder: (context, index) {
                 return ElevatedButton(
                     onPressed: () {
-                      juegoControlador.pagar(
-                          valor, juegoControlador.getParticipantes()[index]);
-                      Navigator.pop(context);
+                      if (juegoControlador.pagar(
+                          valor, juegoControlador.getParticipantes()[index])) {
+                        Navigator.pop(context);
+                        showAlerta("Transacción Exitosa", context);
+                      } else {
+                        showAlerta("Dinero Insuficiente", context);
+                      }
                     },
                     child: Text(
                         juegoControlador.getParticipantes()[index].nombre));

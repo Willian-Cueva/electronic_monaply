@@ -11,10 +11,10 @@ const ASSETJSON = "assets/json/";
 Propietario BANCO =
     Propietario(id: 0, ficha: Fichas.zapato, monto: 100000, nombre: "Banco");
 
+// Esta funcion nos sirve para llamar solamente un mensaje en pantalla
 void showAlerta(String msg, BuildContext context) {
   showDialog(
-      context: context,
-      builder: (BuildContext context) => mostrarAlerta(msg));
+      context: context, builder: (BuildContext context) => mostrarAlerta(msg));
 }
 
 AlertDialog mostrarAlerta(String mensaje) {
@@ -27,7 +27,7 @@ AlertDialog mostrarAlerta(String mensaje) {
 AppBar APPBAR = AppBar(title: const Text("Banco Electrónico"));
 
 // ignore: non_constant_identifier_names
-int DINEROINICIO = 70;
+int DINEROINICIO = 62;
 // ignore: non_constant_identifier_names
 int PASARGO = 200;
 // ignore: non_constant_identifier_names
@@ -36,7 +36,7 @@ int CARCEL = -50;
 int UBICION = -50;
 
 // ignore: non_constant_identifier_names
-int TIEMPO_REGRESIVO = 3;
+int TIEMPO_REGRESIVO = 5;
 
 // ignore: non_constant_identifier_names
 int MONTO_INICIAL = 20;

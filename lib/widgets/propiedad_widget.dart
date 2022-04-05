@@ -24,14 +24,71 @@ class PropiedadWidget extends StatelessWidget {
           },
           child: const Text("Comprar"));
     } else {
+      final String condicionCasa = propiedad.numeroCasas < 5 ? 'Casa' : 'Hotel';
       w = Column(
         children: [
-          ElevatedButton(onPressed: () {}, child: const Text("Pagar")),
-          ElevatedButton(onPressed: () {}, child: const Text("Vender"))
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton(
+                  onPressed: () async {
+                    await _asyncElegirJugador(context, juegoControlador);
+                  },
+                  child: const Text("Pagar")),
+              ElevatedButton(onPressed: () {}, child: const Text("Vender"))
+            ],
+          ),
+          ElevatedButton(
+              onPressed: () {
+                if (juegoControlador.comprarCasa(
+                    propiedad, propiedad.propietario)) {
+                  Navigator.pop(context);
+                  showAlerta("Casa o Hotel adquirido exitosamente", context);
+                } else {
+                  showAlerta(
+                      "Dinero Insuficiente o Límite de mejoras alcanzado",
+                      context);
+                }
+              },
+              child: Text("Comprar $condicionCasa")),
         ],
       );
     }
     return w;
+  }
+
+  Future<void> _asyncElegirJugador(
+      BuildContext context, JuegoControlador juegoControlador) async {
+    return await showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: const Text('Selecciona el Jugador'),
+            children: juegoControlador
+                .getParticipantes()
+                .map((e) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            if (juegoControlador
+                                .pasarPorPropiedadConPropietario(
+                                    e, propiedad)) {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              showAlerta(
+                                  "Casa comprada exitosamente :D", context);
+                            } else {
+                              showAlerta(
+                                  "Dinero Insuficiente :( jajajaj o ha ocurrido un error :[",
+                                  context);
+                            }
+                          },
+                          child: Text(e.nombre)),
+                    ))
+                .toList(),
+          );
+        });
   }
 
   Future<void> _asyncComprar(
@@ -42,7 +99,8 @@ class PropiedadWidget extends StatelessWidget {
         builder: (BuildContext context) {
           return SimpleDialog(
             title: const Text('Selecciona el Jugador'),
-            children: juegoControlador.propietarios
+            children: juegoControlador
+                .getParticipantes()
                 .map((e) => Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: ElevatedButton(
